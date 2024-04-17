@@ -39,6 +39,9 @@ if __name__ == '__main__':
             print(result)
 
 
+        highest_vote = max(
+        print(highest_vote)
+
 
 
         #output_string = "Election Results\n"
