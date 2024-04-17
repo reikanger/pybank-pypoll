@@ -3,7 +3,7 @@
 import csv
 import os
 
-export_file = os.path.join("analysis", "budget_analysis.csv")
+export_file = os.path.join("analysis", "budget_analysis.txt")
 input_file = os.path.join("resources", "budget_data.csv") 
 
 budget_data = {}
@@ -34,19 +34,31 @@ if __name__ == "__main__":
     changes_average = round(sum(changes) / len(changes), 2)
 
     # greatest increase in profits (date and amount) over entire period
-    greatest_increase = 0
+    greatest_increase = max(changes)
 
     # greatest decrease in profits (date and amount) over entire period
-    greatest_decrease = 0
+    greatest_decrease = min(changes)
 
+    # find the matching dates where greatest increase and greatest decrease occurred
+    # iterate over budget_data twice to be able to compare against two entries - credit to Google Gemini for the nested for loop idea
+    for date, pl in budget_data.items():
+        for date2, pl2 in budget_data.items():
+            if pl - pl2 == greatest_increase:
+                #print(f"greatest increase - date: {date} and change: {pl - pl2}")
+                greatest_increase_date = date
+            if pl - pl2 == greatest_decrease:
+                #print(f"greatest decrease - date: {date} and change: {pl - pl2}")
+                greatest_decrease_date = date
+
+    # build output
     output_string = ""
     output_string += "Financial Analysis\n"
     output_string += "----------------------------\n"
     output_string += f"Total Months: {total_months}\n"
     output_string += f"Total: ${total_profit_loss}\n"
     output_string += f"Average Change: ${changes_average}\n"
-    output_string += f"Greatest Increase in Profits: {greatest_increase} (${greatest_increase})\n"
-    output_string += f"Greatest Decrease in Profits: {greatest_decrease} (${greatest_decrease})"
+    output_string += f"Greatest Increase in Profits: {greatest_increase_date} (${greatest_increase})\n"
+    output_string += f"Greatest Decrease in Profits: {greatest_decrease_date} (${greatest_decrease})"
 
     # write to console
     print(output_string)
@@ -54,8 +66,3 @@ if __name__ == "__main__":
     # write to file
     with open(export_file, 'w') as fd:
         fd.write(output_string)
-
-    # testing - to remove
-    print()
-    print(budget_data["Jan-14"])
-    print(budget_data["Feb-14"])
