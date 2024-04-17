@@ -4,15 +4,12 @@ import csv
 import os
 
 input_file = os.path.join("resources", "election_data.csv")
+export_file = os.path.join("analysis", "election_results.txt")
 
 votes = []
 
-def get_total_votes(name, votes):
-    votes.count(name)
-    return False
-
-def get_total_percent():
-    return False
+def get_percent(x, total):
+    return round((x / total) * 100, 3)
 
 if __name__ == '__main__':
     with open(input_file, 'r') as csvfile:
@@ -26,31 +23,33 @@ if __name__ == '__main__':
         # total number of votes cast
         total_votes = len(votes)
 
-        results = []  # intended for list of dictionaries - results for each candidate
+        # build dictionary of candidate to their total number of votes
+        candidate_votes = {}
         for unique_name in list(set(votes)):
-            results.append({ # add dictionary of candidate and vote count
-                'name': unique_name,
-                'total_votes': votes.count(unique_name),
-                'percent_votes': (votes.count(unique_name) / total_votes) * 100
-            })
+            candidate_votes[unique_name] = votes.count(unique_name)
 
-        # print results
-        for result in results:
-            print(result)
+        # find winning candidate
+        highest_vote = max(candidate_votes.values())
+        for name, votes in candidate_votes.items():
+            if votes == highest_vote:
+                winning_candidate = name
+                break
 
+        output_string = "Election Results\n"
+        output_string += "-------------------------\n"
+        output_string += f"Total Votes: {total_votes}\n"
+        output_string += "-------------------------\n"
 
-        highest_vote = max(
-        print(highest_vote)
+        for name, votes in candidate_votes.items():
+            output_string += f"{name}: {get_percent(votes, total_votes)}% ({votes})\n"
 
+        output_string += "-------------------------\n"
+        output_string += f"Winner: {winning_candidate}\n"
+        output_string += "-------------------------"
 
+        # print to console
+        print(output_string)
 
-        #output_string = "Election Results\n"
-        #output_string += "-------------------------\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
-        #output_string += f"{}: {}% ({})\n"
+        # write to file
+        with open(export_file, 'w') as fd:
+            fd.write(output_string)
