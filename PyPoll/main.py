@@ -9,6 +9,7 @@ export_file = os.path.join("analysis", "election_results.txt")
 votes = []
 
 def get_percent(x, total):
+    '''return percentage value of x compared to total'''
     return round((x / total) * 100, 3)
 
 if __name__ == '__main__':
