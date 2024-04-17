@@ -14,6 +14,7 @@ if __name__ == "__main__":
         reader = csv.reader(csvfile)
         next(reader)  # skip header
 
+        # build dictionary of {'Date': 'Profit/Loss Value'}
         for row in reader:
             budget_data[row[0]] = int(row[1])
 
@@ -44,10 +45,8 @@ if __name__ == "__main__":
     for date, pl in budget_data.items():
         for date2, pl2 in budget_data.items():
             if pl - pl2 == greatest_increase:
-                #print(f"greatest increase - date: {date} and change: {pl - pl2}")
                 greatest_increase_date = date
             if pl - pl2 == greatest_decrease:
-                #print(f"greatest decrease - date: {date} and change: {pl - pl2}")
                 greatest_decrease_date = date
 
     # build output
