@@ -35,6 +35,7 @@ if __name__ == '__main__':
                 winning_candidate = name
                 break
 
+        # build output
         output_string = "Election Results\n"
         output_string += "-------------------------\n"
         output_string += f"Total Votes: {total_votes}\n"
