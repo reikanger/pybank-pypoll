@@ -6,6 +6,11 @@ python main.py
 ```
 
 ## Repository Contents
+- Images - image files from starter code archive 
+- PyBank - PyPoll files
+- PyPoll - PyPoll files
+- Instructions.pdf - instructions for assignment copied from class website
+
 ### PyBank
 - main.py - main script of the PyBank assignment
 - analysis - output files created by main.py
