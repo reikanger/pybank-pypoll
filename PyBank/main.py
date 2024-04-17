@@ -34,8 +34,10 @@ if __name__ == "__main__":
     changes_average = round(sum(changes) / len(changes), 2)
 
     # greatest increase in profits (date and amount) over entire period
+    greatest_increase = 0
 
     # greatest decrease in profits (date and amount) over entire period
+    greatest_decrease = 0
 
     output_string = ""
     output_string += "Financial Analysis\n"
@@ -43,8 +45,8 @@ if __name__ == "__main__":
     output_string += f"Total Months: {total_months}\n"
     output_string += f"Total: ${total_profit_loss}\n"
     output_string += f"Average Change: ${changes_average}\n"
-    output_string += f"Greatest Increase in Profits: {} (${})\n"
-    output_string += f"Greatest Decrease in Profits: {} (${})"
+    output_string += f"Greatest Increase in Profits: {greatest_increase} (${greatest_increase})\n"
+    output_string += f"Greatest Decrease in Profits: {greatest_decrease} (${greatest_decrease})"
 
     # write to console
     print(output_string)
