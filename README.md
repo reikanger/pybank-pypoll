@@ -1,4 +1,4 @@
-# Homework 3
+# PyBank and PyPoll
 
 Run the main.py scripts, one each for PyBank and PyPoll, with a Python interpreter:
 ```shell
